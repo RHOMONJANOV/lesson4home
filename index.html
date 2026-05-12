@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uz">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Abdulbosid Raxmonjanov · Portfolio | Dark/Light + Animated BG</title>
-    <!-- Google Fonts & simple reset for modern look -->
+    <title>Abdulbosid Raxmonjanov | Yosh Backend Developer</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
-    <!-- Font Awesome 6 (free icons) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -15,15 +13,7 @@
             box-sizing: border-box;
         }
 
-        /* Animated gradient background - SMOOTH MOVEMENT */
-        body {
-            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
-            line-height: 1.5;
-            min-height: 100vh;
-            transition: background 0.3s ease, color 0.2s ease;
-        }
-
-        /* Animated Background Wrapper (floating gradient) */
+        /* HARAKATLANUVCHI ANIMATSIYALI FON */
         .animated-bg {
             position: fixed;
             top: 0;
@@ -31,24 +21,17 @@
             width: 100%;
             height: 100%;
             z-index: -2;
-            background: linear-gradient(125deg, #0b1120, #111827, #1e293b);
-            background-size: 300% 300%;
-            animation: auroraFlow 14s ease infinite;
+            background: linear-gradient(125deg, #0b1120, #111827, #1e293b, #0f172a);
+            background-size: 400% 400%;
+            animation: auroraFlow 16s ease infinite;
         }
 
         @keyframes auroraFlow {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        /* overlay gradient for extra richness (dark mode default) */
         .animated-bg::after {
             content: "";
             position: absolute;
@@ -56,134 +39,122 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 20% 30%, rgba(45, 110, 140, 0.2), transparent 70%);
+            background: radial-gradient(circle at 30% 40%, rgba(56, 189, 248, 0.15), transparent 70%);
             pointer-events: none;
         }
 
-        /* light mode override for background */
         body.light-mode .animated-bg {
-            background: linear-gradient(125deg, #f9f3e8, #e9f0f5, #dce5ed);
-            background-size: 300% 300%;
-            animation: auroraFlowLight 15s ease infinite;
+            background: linear-gradient(125deg, #fef9e8, #e0f2fe, #f1f5f9, #fce7f3);
+            background-size: 400% 400%;
+            animation: auroraFlowLight 16s ease infinite;
         }
         body.light-mode .animated-bg::after {
-            background: radial-gradient(circle at 70% 20%, rgba(100, 150, 180, 0.15), transparent 70%);
+            background: radial-gradient(circle at 70% 20%, rgba(2, 132, 199, 0.12), transparent 70%);
         }
         @keyframes auroraFlowLight {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        /* main card container with backdrop blur & glassmorphism effect */
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            line-height: 1.5;
+            min-height: 100vh;
+            transition: color 0.2s ease;
+        }
+
+        /* ASOSIY KARTA */
         .resume-container {
             max-width: 1100px;
             margin: 2rem auto;
-            background: rgba(255, 255, 255, 0.92);
+            background: rgba(255, 255, 255, 0.94);
             backdrop-filter: blur(2px);
             border-radius: 2rem;
-            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.3);
             overflow: hidden;
-            transition: background 0.3s ease, box-shadow 0.3s, color 0.2s;
+            transition: background 0.3s, box-shadow 0.3s;
         }
-
-        /* dark mode card style */
         body.dark-mode .resume-container {
-            background: rgba(18, 25, 45, 0.9);
+            background: rgba(15, 23, 42, 0.92);
             backdrop-filter: blur(3px);
-            box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.5);
-            color: #eef2ff;
+            box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.6);
         }
 
-        /* theme toggle button */
+        /* REJIM O'ZGARTIRISH KNOpkasi */
         .theme-toggle {
             position: fixed;
             top: 1.5rem;
             right: 1.8rem;
             z-index: 100;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255,255,255,0.3);
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.25);
             border-radius: 60px;
-            padding: 0.65rem 1.2rem;
+            padding: 0.65rem 1.3rem;
             cursor: pointer;
-            font-weight: 600;
             display: flex;
             align-items: center;
             gap: 10px;
+            font-weight: 600;
             font-size: 0.9rem;
             transition: all 0.2s;
-            color: #fff;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
         body.light-mode .theme-toggle {
-            background: rgba(30, 40, 60, 0.2);
-            backdrop-filter: blur(8px);
-            color: #1e2f3f;
-            border-color: rgba(0,0,0,0.1);
+            background: rgba(30, 41, 59, 0.7);
+            color: #f1f5f9;
+            border-color: rgba(255,255,255,0.4);
         }
-        .theme-toggle i {
-            font-size: 1.2rem;
-        }
-        .theme-toggle:hover {
-            transform: scale(1.02);
-            background: rgba(0,0,0,0.3);
-        }
+        .theme-toggle:hover { transform: scale(1.02); background: rgba(0,0,0,0.7); }
 
-        /* profile header */
+        /* PROFIL */
         .profile-header {
-            padding: 2.5rem 2rem 1.8rem 2rem;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            padding: 2.5rem 2rem 1.8rem;
             text-align: center;
-            transition: border 0.2s;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
         }
-        body.dark-mode .profile-header {
-            border-bottom-color: rgba(255, 255, 255, 0.1);
-        }
+        body.dark-mode .profile-header { border-bottom-color: rgba(255,255,255,0.1); }
+
         .avatar {
-            width: 130px;
-            height: 130px;
+            width: 140px;
+            height: 140px;
             object-fit: cover;
             border-radius: 50%;
             border: 4px solid white;
-            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.2);
-            transition: transform 0.25s ease;
-            background: #cbd5e1;
-        }
-        .avatar:hover {
-            transform: scale(1.02);
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.25);
+            background: #2c7da0;
         }
         .profile-header h1 {
-            font-size: 2.5rem;
+            font-size: 2.4rem;
             font-weight: 800;
-            letter-spacing: -0.02em;
             margin-top: 1rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.25rem;
         }
-        body.light-mode .profile-header h1 {
-            background: linear-gradient(120deg, #0f2b3d, #1e4a6e);
+        body.light-mode .profile-header h1 { color: #0f2b3d; }
+        body.dark-mode .profile-header h1 { 
+            background: linear-gradient(135deg, #b9e0ff, #7ab3c8);
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
         }
-        body.dark-mode .profile-header h1 {
-            background: linear-gradient(135deg, #c1e0ff, #9ac2db);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
+        .badge-age {
+            background: #2c7da0;
+            display: inline-block;
+            padding: 0.25rem 1rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: white;
+            margin-top: 0.5rem;
         }
         .contact-links {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 1.8rem;
-            margin-top: 1rem;
+            gap: 1rem;
+            margin-top: 1.2rem;
         }
         .contact-item {
             display: inline-flex;
@@ -192,184 +163,128 @@
             background: #f1f5f9;
             padding: 0.5rem 1.2rem;
             border-radius: 60px;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 500;
-            transition: all 0.2s;
             text-decoration: none;
             color: #1e4663;
+            transition: 0.2s;
         }
         body.dark-mode .contact-item {
-            background: #1f2a3e;
-            color: #cbdff2;
+            background: #1e293b;
+            color: #cbd5e6;
         }
-        .contact-item i {
-            color: #2c7da0;
-        }
-        body.dark-mode .contact-item i {
-            color: #7ab3c8;
-        }
-        .contact-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 18px rgba(0,0,0,0.1);
-        }
+        .contact-item:hover { transform: translateY(-3px); box-shadow: 0 6px 14px rgba(0,0,0,0.1); }
         hr {
-            margin: 1rem auto 0 auto;
-            width: 80px;
+            margin: 1.2rem auto 0;
+            width: 70px;
             height: 3px;
             background: #cbdde9;
             border: 0;
             border-radius: 4px;
         }
-        body.dark-mode hr {
-            background: #3a4c66;
-        }
-        .content {
-            padding: 2rem 2.2rem 2.5rem 2.2rem;
-        }
-        .section {
-            margin-bottom: 2.8rem;
-        }
+        .content { padding: 2rem 2.2rem 2.5rem; }
+
+        /* BO'LIMLAR */
         .section-title {
             display: flex;
             align-items: center;
             gap: 0.75rem;
-            font-size: 1.8rem;
+            font-size: 1.7rem;
             font-weight: 700;
             border-left: 5px solid #2c7da0;
             padding-left: 1rem;
             margin-bottom: 1.6rem;
         }
-        body.light-mode .section-title {
-            color: #0f2b3d;
+        body.light-mode .section-title { color: #0f2b3d; }
+        body.dark-mode .section-title { color: #e2edf7; }
+        .section-title i { font-size: 1.5rem; color: #2c7da0; }
+
+        .info-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            background: #f9fbfd;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1.8rem;
+            border: 1px solid #e9edf2;
         }
-        body.dark-mode .section-title {
-            color: #e2edf7;
+        body.dark-mode .info-grid { background: #0f172acc; border-color: #2d3a4e; }
+        .info-card {
+            flex: 1;
+            min-width: 180px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
-        .section-title i {
-            font-size: 1.6rem;
+        .info-icon {
+            width: 48px;
+            height: 48px;
+            background: #e0f2fe;
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
             color: #2c7da0;
         }
-        .job-card, .project-card {
+        body.dark-mode .info-icon { background: #1e293b; }
+        .info-text strong { display: block; font-size: 0.9rem; opacity: 0.7; }
+        .info-text span { font-weight: 700; font-size: 1.1rem; }
+
+        /* skill barlar */
+        .skill-item {
+            margin-bottom: 1.2rem;
+        }
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+        }
+        .progress-bar {
+            height: 10px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #2c7da0, #3b82f6);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        body.dark-mode .progress-bar { background: #1e2a3a; }
+
+        .job-card, .school-card {
             background: #f9fbfd;
             border-radius: 1.5rem;
             padding: 1.4rem 1.8rem;
             margin-bottom: 1.5rem;
-            transition: all 0.2s;
             border: 1px solid #e9edf2;
-        }
-        body.dark-mode .job-card, body.dark-mode .project-card {
-            background: #0f172acc;
-            border-color: #2d3a4e;
-        }
-        .job-card:hover, .project-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 22px -12px rgba(0, 0, 0, 0.15);
-        }
-        .job-title {
-            font-weight: 700;
-            font-size: 1.35rem;
-            margin-bottom: 0.25rem;
-        }
-        body.light-mode .job-title { color: #114e6e; }
-        body.dark-mode .job-title { color: #bbd4f0; }
-        .company {
-            font-weight: 600;
-            color: #2c7da0;
-        }
-        body.dark-mode .company { color: #8bbdd9; }
-        .date {
-            font-size: 0.85rem;
-            background: #eef3fc;
-            padding: 0.2rem 0.7rem;
-            border-radius: 30px;
-            display: inline-block;
-        }
-        body.dark-mode .date {
-            background: #1e2a3c;
-            color: #b9d0e4;
-        }
-        .role {
-            font-weight: 600;
-            margin: 0.5rem 0 0.8rem 0;
-        }
-        .desc-list {
-            margin-top: 0.75rem;
-            padding-left: 1.2rem;
-        }
-        .desc-list li {
-            margin-bottom: 0.4rem;
-        }
-        pre {
-            font-family: 'Inter', monospace;
-            background: #f1f5f9;
-            padding: 0.8rem 1.2rem;
-            border-radius: 1rem;
-            font-size: 0.9rem;
-            margin-top: 0.6rem;
-            white-space: pre-wrap;
-            border-left: 3px solid #7fb4ca;
-        }
-        body.dark-mode pre {
-            background: #0a101ccc;
-            color: #ccdeee;
-            border-left-color: #547e9e;
-        }
-        .project-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 600;
-            text-decoration: none;
-            background: #eef2fa;
-            padding: 0.3rem 1rem;
-            border-radius: 40px;
             transition: 0.2s;
         }
-        body.dark-mode .project-link {
-            background: #273753;
-            color: #cfe5ff;
-        }
-        .project-link:hover {
-            background: #2c7da0;
-            color: white;
-        }
-        .project-item {
-            display: flex;
-            align-items: baseline;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-            margin-bottom: 1rem;
-            padding: 0.6rem 0;
-            border-bottom: 1px dashed #e2e8f0;
-        }
-        body.dark-mode .project-item {
-            border-bottom-color: #2a3a4e;
-        }
-        .badge-text {
-            background: #eef2ff;
-            border-radius: 24px;
-            padding: 0.2rem 0.8rem;
-            font-size: 0.8rem;
-        }
-        body.dark-mode .badge-text {
-            background: #1e2f42;
-        }
+        body.dark-mode .job-card, body.dark-mode .school-card { background: #0f172acc; border-color: #2d3a4e; }
+        .job-card:hover { transform: translateY(-3px); }
+        .job-title { font-weight: 800; font-size: 1.3rem; margin-bottom: 0.25rem; }
+        body.light-mode .job-title { color: #114e6e; }
+        body.dark-mode .job-title { color: #bbd4f0; }
+
         @media (max-width: 700px) {
             .content { padding: 1.5rem; }
-            .profile-header h1 { font-size: 1.9rem; }
-            .contact-links { flex-direction: column; align-items: center; }
+            .profile-header h1 { font-size: 1.8rem; }
             .theme-toggle { top: 1rem; right: 1rem; padding: 0.5rem 1rem; }
         }
+
         footer {
             text-align: center;
             font-size: 0.8rem;
-            padding-top: 1rem;
+            padding-top: 1.2rem;
+            margin-top: 0.5rem;
             border-top: 1px solid rgba(0,0,0,0.05);
         }
-        body.dark-mode footer {
-            border-top-color: #1f2c3c;
-            color: #8ba0b8;
-        }
+        body.dark-mode footer { border-top-color: #1f2c3c; color: #8ba0b8; }
     </style>
 </head>
 <body class="dark-mode">
@@ -378,124 +293,106 @@
         <i class="fas fa-moon" id="themeIcon"></i>
         <span id="themeLabel">Dark Mode</span>
     </div>
+
     <div class="resume-container">
         <div class="profile-header">
             <div class="avatar-wrapper">
-                <img class="avatar" src="user.png" alt="Abdulbosid Raxmonjanov" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?background=2c7da0&color=fff&rounded=true&size=130&name=Abdulbosid+Raxmonjanov';">
+                <img class="avatar" src="user.png" alt="Abdulbosid Raxmonjanov" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?background=1e4a6e&color=fff&rounded=true&size=140&name=Abdulbosid+Raxmonjanov';">
             </div>
-            <h1>Raxmonjanov Abdulbosid</h1>
+            <h1>Abdulbosid Raxmonjanov</h1>
+            <div class="badge-age">🎂 15 yosh · 2011-yilda tug‘ilgan</div>
             <div class="contact-links">
-                <a class="contact-item" href="http://instagram.com/vibes.rek1" target="_blank" rel="noopener noreferrer">
-                    <i class="fab fa-instagram"></i> Instagram · vibes.rek1
-                </a>
-                <a class="contact-item" href="mailto:herokujava01@gmail.com">
-                    <i class="fas fa-envelope"></i> herokujava01@gmail.com
-                </a>
+                <div class="contact-item"><i class="fas fa-map-marker-alt"></i> Chortoq tumani, G‘alaba MFY 117-uy</div>
+                <div class="contact-item"><i class="fas fa-laptop-code"></i> Yosh Backend Developer</div>
             </div>
             <hr>
         </div>
+
         <div class="content">
-            <!-- Experience section -->
+            <!-- ASOSIY MA'LUMOTLAR -->
             <div class="section">
-                <div class="section-title">
-                    <i class="fas fa-briefcase"></i>
-                    <span>Work Experience</span>
-                </div>
-                <div class="job-card">
-                    <div class="job-title">Cloud Linux Inc, California</div>
-                    <div><span class="company"><i class="fas fa-cloud"></i> Cloud Linux Inc</span> <span class="date"><i class="far fa-calendar-alt"></i> July 2019 – October 2020</span></div>
-                    <div class="role">Software Engineer (Remote)</div>
-                    <span>✨ Worked on high-impact projects:</span>
-                    <ul class="desc-list">
-                        <li><strong>Live Manager:</strong> Real-time live events system, reduced latency by 25%.</li>
-                        <li><strong>Data Analytics Tool:</strong> Scalable analytics pipelines processing millions of events.</li>
-                        <li><strong>API Development:</strong> RESTful APIs for internal/external services.</li>
-                    </ul>
-                    <pre>🔧 Stack: Node.js, Python, AWS, PostgreSQL, Docker</pre>
-                </div>
-                <div class="job-card">
-                    <div class="job-title">NexaCore Systems, Austin (Remote / Hybrid)</div>
-                    <div><span class="company"><i class="fas fa-laptop-code"></i> NexaCore Systems</span> <span class="date"><i class="far fa-calendar-alt"></i> November 2020 – Present</span></div>
-                    <div class="role">Senior Full-Stack Developer</div>
-                    <ul class="desc-list">
-                        <li><strong>Project Horizon:</strong> Migrated monolith to microservices → 40% faster deployment.</li>
-                        <li><strong>Real-time Dashboard:</strong> WebSocket analytics for 10k+ concurrent users.</li>
-                        <li><strong>Open-source:</strong> Maintained UI library + code coverage 92%.</li>
-                    </ul>
-                    <pre>⚡ CI/CD, Kubernetes, code reviews, mentoring</pre>
+                <div class="section-title"><i class="fas fa-user-astronaut"></i><span>Asosiy ma’lumot</span></div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-icon"><i class="fas fa-calendar-alt"></i></div><div class="info-text"><strong>Tug‘ilgan yil</strong><span>2011</span></div></div>
+                    <div class="info-card"><div class="info-icon"><i class="fas fa-map-pin"></i></div><div class="info-text"><strong>Manzil</strong><span>Namangan viloyati, Chortoq</span></div></div>
+                    <div class="info-card"><div class="info-icon"><i class="fas fa-graduation-cap"></i></div><div class="info-text"><strong>O‘quv markazi</strong><span>“Algoritm” o‘quv markazi</span></div></div>
+                    <div class="info-card"><div class="info-icon"><i class="fas fa-code"></i></div><div class="info-text"><strong>Kasb</strong><span>Yosh Backend Developer</span></div></div>
                 </div>
             </div>
-            <!-- Projects -->
+
+            <!-- BILIM KO'RSATKICHLAR (PROGRESS BARS) -->
             <div class="section">
-                <div class="section-title">
-                    <i class="fas fa-code-branch"></i>
-                    <span>Featured Projects</span>
-                </div>
-                <div class="project-card">
-                    <p style="margin-bottom: 1rem; font-weight: 500;">🚀 Innovative side-projects & open-source:</p>
-                    <div class="project-item"><a class="project-link" href="https://github.com/yourproject1" target="_blank"><i class="fab fa-github"></i> EventFlow</a><span class="project-desc">Event-driven live notification system (Kafka + React).</span></div>
-                    <div class="project-item"><a class="project-link" href="https://github.com/yourproject1" target="_blank"><i class="fab fa-github"></i> InsightViz</a><span class="project-desc">Interactive analytics dashboard with D3.js + FastAPI.</span></div>
-                    <div class="project-item"><a class="project-link" href="https://github.com/yourproject1" target="_blank"><i class="fab fa-github"></i> Cloud Manager</a><span class="project-desc">Infra as Code with Terraform, AWS Lambda orchestration.</span></div>
-                    <div class="project-item"><a class="project-link" href="https://github.com/yourproject1" target="_blank"><i class="fab fa-github"></i> PetCare API</a><span class="project-desc">RESTful microservice, JWT auth, Swagger docs.</span></div>
-                </div>
-            </div>
-            <!-- Another company original section with pre content preserved -->
-            <div class="section">
-                <div class="section-title">
-                    <i class="fas fa-chalkboard-user"></i>
-                    <span>Early career & milestones</span>
-                </div>
+                <div class="section-title"><i class="fas fa-chart-line"></i><span>Texnologiyalar & bilim darajasi</span></div>
                 <div class="job-card">
-                    <div class="job-title">Another Company · DevCore Labs, San Francisco</div>
-                    <div><span class="company"><i class="fas fa-building"></i> DevCore Labs</span> <span class="date">2021 – 2022</span></div>
-                    <div class="role">Junior Software Engineer → Associate Developer</div>
-                    <b>Details about responsibilities and achievements:</b>
-                    <ul class="desc-list">
-                        <li><strong>Project Nexus:</strong> Data pipeline throughput +30%.</li>
-                        <li><strong>Internal Tooling:</strong> CLI for db migrations used by 5+ teams.</li>
-                        <li><strong>Refactoring:</strong> Reduced technical debt by 22%.</li>
-                    </ul>
-                    <pre>💡 Project 1: Smart Notification Service — ML-based priority routing.
-💡 Project 2: Analytics Pipeline — Redis Streams aggregator.
-💡 Project 3: GraphQL Gateway — unified API layer for three backends.</pre>
-                    <div><span class="badge-text"><i class="fas fa-trophy"></i> Internal Hackathon Winner 2022</span></div>
+                    <div class="skill-item"><div class="skill-header"><span><i class="fab fa-node-js"></i> Backend (Node.js, Python, Java asoslari)</span><span>50%</span></div><div class="progress-bar"><div class="progress-fill" style="width: 50%;"></div></div></div>
+                    <div class="skill-item"><div class="skill-header"><span><i class="fas fa-paint-brush"></i> Frontend (HTML, CSS, JavaScript asoslari)</span><span>20%</span></div><div class="progress-bar"><div class="progress-fill" style="width: 20%;"></div></div></div>
+                    <div class="skill-item"><div class="skill-header"><span><i class="fas fa-database"></i> SQL / API asoslari</span><span>45%</span></div><div class="progress-bar"><div class="progress-fill" style="width: 45%;"></div></div></div>
+                    <div class="skill-item"><div class="skill-header"><span><i class="fas fa-brain"></i> Algoritmlar va dasturlash mantiqi</span><span>60%</span></div><div class="progress-bar"><div class="progress-fill" style="width: 60%;"></div></div></div>
                 </div>
             </div>
-            <!-- Tech skills -->
+
+            <!-- TAHSIL VA HOZIRGI O'QISHI -->
             <div class="section">
-                <div class="section-title">
-                    <i class="fas fa-cogs"></i>
-                    <span>Technical Arsenal</span>
+                <div class="section-title"><i class="fas fa-school"></i><span>Ta’lim va rivojlanish</span></div>
+                <div class="school-card">
+                    <div class="job-title"><i class="fas fa-chalkboard-user"></i> “Algoritm” o‘quv markazi</div>
+                    <div>✨ Hozirda faol o‘quvchi · Backend yo‘nalishi</div>
+                    <ul class="desc-list" style="margin-top: 0.8rem; padding-left: 1.2rem;">
+                        <li>📘 Backend dasturlash: Node.js, Express, ma’lumotlar bazalari</li>
+                        <li>💡 Loyihalar: REST API, oddiy autentifikatsiya tizimlari</li>
+                        <li>🚀 Maqsad: Full-stack dasturchi bo‘lish va real loyihalarda qatnashish</li>
+                    </ul>
                 </div>
-                <div style="display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.5rem;">
-                    <span style="background:#eef2ff; padding:0.4rem 1rem; border-radius:40px; font-weight:500;">JavaScript/TS</span>
-                    <span style="background:#eef2ff; padding:0.4rem 1rem; border-radius:40px; font-weight:500;">Python</span>
-                    <span style="background:#eef2ff; padding:0.4rem 1rem; border-radius:40px; font-weight:500;">Java</span>
-                    <span style="background:#eef2ff; padding:0.4rem 1rem; border-radius:40px; font-weight:500;">React/Next.js</span>
-                    <span style="background:#eef2ff; padding:0.4rem 1rem; border-radius:40px; font-weight:500;">Node.js</span>
-                    <span style="background:#eef2ff; padding:0.4rem 1rem; border-radius:40px; font-weight:500;">AWS</span>
-                    <span style="background:#eef2ff; padding:0.4rem 1rem; border-radius:40px; font-weight:500;">Docker/K8s</span>
-                    <span style="background:#eef2ff; padding:0.4rem 1rem; border-radius:40px; font-weight:500;">PostgreSQL</span>
+                <div class="school-card">
+                    <div class="job-title"><i class="fas fa-lightbulb"></i> Shaxsiy yutuqlar va qiziqishlar</div>
+                    <ul class="desc-list">
+                        <li>⚡ Yoshligiga qaramasdan, har kuni kod yozish va yangi texnologiyalarni o‘rganish</li>
+                        <li>📌 Backend sohasida mustaqil loyihalar: kichik chat ilovasi, shaxsiy portfolio</li>
+                        <li>🎯 Kelajak rejasi: O‘zbekistonda IT sohasini rivojlantirishga hissa qo‘shish</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- LOYIHALAR VA QIZIQARLI QISM -->
+            <div class="section">
+                <div class="section-title"><i class="fas fa-code-branch"></i><span>Kichik loyihalar / tajriba</span></div>
+                <div class="job-card">
+                    <p><i class="fas fa-terminal"></i> <strong>Hozirgi o‘rganish jarayoni:</strong></p>
+                    <pre>🌐 Backend (50%) – Node.js, Express, MongoDB asoslari
+🎨 Frontend (20%) – HTML5, CSS3, JavaScript, Reactga kirish
+🧠 Har kuni 2-3 soat kod yozish va algoritmik masalalar</pre>
+                    <div style="margin-top: 0.8rem;"><span class="badge-text" style="background:#eef2ff; padding:0.3rem 0.8rem;"><i class="fab fa-github"></i> GitHub portfolio yaratilmoqda</span></div>
+                </div>
+            </div>
+
+            <!-- QO'SHIMCHA: QOBILIYATLAR -->
+            <div class="section">
+                <div class="section-title"><i class="fas fa-heart"></i><span>Ko‘nikma va shaxsiy sifatlar</span></div>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.7rem;">
+                    <span style="background:#e0f2fe; padding:0.4rem 1rem; border-radius:30px;">🧩 Muammolarni hal qilish</span>
+                    <span style="background:#e0f2fe; padding:0.4rem 1rem; border-radius:30px;">📖 Tez o‘rganish</span>
+                    <span style="background:#e0f2fe; padding:0.4rem 1rem; border-radius:30px;">🤝 Jamoada ishlash</span>
+                    <span style="background:#e0f2fe; padding:0.4rem 1rem; border-radius:30px;">🎯 Intizom va maqsad sodiqligi</span>
                 </div>
                 <style>
-                    body.dark-mode .section span[style*="background:#eef2ff"] {
+                    body.dark-mode span[style*="background:#e0f2fe"] {
                         background: #1f2b3e !important;
                         color: #cbdff5;
                     }
                 </style>
             </div>
             <footer>
-                <i class="fas fa-globe"></i> Open for collaborations · Animated cosmic flow · Theme switcher included
+                <i class="fas fa-code"></i> “Algoritm” o‘quv markazi o‘quvchisi | Namangan, Chortoq | 15 yoshda backend yo‘lida
             </footer>
         </div>
     </div>
+
     <script>
         (function() {
             const toggleBtn = document.getElementById('themeToggleBtn');
             const themeIcon = document.getElementById('themeIcon');
             const themeLabel = document.getElementById('themeLabel');
             const body = document.body;
-            
             function setTheme(theme) {
                 if (theme === 'light') {
                     body.classList.remove('dark-mode');
@@ -511,20 +408,12 @@
                     localStorage.setItem('portfolio-theme', 'dark');
                 }
             }
-            
-            const savedTheme = localStorage.getItem('portfolio-theme');
-            if (savedTheme === 'light') {
-                setTheme('light');
-            } else {
-                setTheme('dark');
-            }
-            
+            const saved = localStorage.getItem('portfolio-theme');
+            if (saved === 'light') setTheme('light');
+            else setTheme('dark');
             toggleBtn.addEventListener('click', () => {
-                if (body.classList.contains('dark-mode')) {
-                    setTheme('light');
-                } else {
-                    setTheme('dark');
-                }
+                if (body.classList.contains('dark-mode')) setTheme('light');
+                else setTheme('dark');
             });
         })();
     </script>
