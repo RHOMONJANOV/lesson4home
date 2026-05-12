@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Abdulbosid Raxmonjanov · Portfolio</title>
+    <title>Abdulbosid Raxmonjanov · Portfolio | Dark/Light + Animated BG</title>
     <!-- Google Fonts & simple reset for modern look -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <!-- Font Awesome 6 (free icons) -->
@@ -15,38 +15,137 @@
             box-sizing: border-box;
         }
 
+        /* Animated gradient background - SMOOTH MOVEMENT */
         body {
-            background: linear-gradient(145deg, #f8fafc 0%, #eef2f5 100%);
             font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
-            color: #0a2540;
             line-height: 1.5;
-            padding: 2rem 1rem;
+            min-height: 100vh;
+            transition: background 0.3s ease, color 0.2s ease;
         }
 
-        /* main card container */
+        /* Animated Background Wrapper (floating gradient) */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(125deg, #0b1120, #111827, #1e293b);
+            background-size: 300% 300%;
+            animation: auroraFlow 14s ease infinite;
+        }
+
+        @keyframes auroraFlow {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* overlay gradient for extra richness (dark mode default) */
+        .animated-bg::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 30%, rgba(45, 110, 140, 0.2), transparent 70%);
+            pointer-events: none;
+        }
+
+        /* light mode override for background */
+        body.light-mode .animated-bg {
+            background: linear-gradient(125deg, #f9f3e8, #e9f0f5, #dce5ed);
+            background-size: 300% 300%;
+            animation: auroraFlowLight 15s ease infinite;
+        }
+        body.light-mode .animated-bg::after {
+            background: radial-gradient(circle at 70% 20%, rgba(100, 150, 180, 0.15), transparent 70%);
+        }
+        @keyframes auroraFlowLight {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* main card container with backdrop blur & glassmorphism effect */
         .resume-container {
             max-width: 1100px;
-            margin: 0 auto;
-            background: #ffffff;
+            margin: 2rem auto;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(2px);
             border-radius: 2rem;
-            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.2), 0 4px 12px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            transition: all 0.2s ease;
+            transition: background 0.3s ease, box-shadow 0.3s, color 0.2s;
         }
 
-        /* header area with subtle gradient */
+        /* dark mode card style */
+        body.dark-mode .resume-container {
+            background: rgba(18, 25, 45, 0.9);
+            backdrop-filter: blur(3px);
+            box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.5);
+            color: #eef2ff;
+        }
+
+        /* theme toggle button */
+        .theme-toggle {
+            position: fixed;
+            top: 1.5rem;
+            right: 1.8rem;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 60px;
+            padding: 0.65rem 1.2rem;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        body.light-mode .theme-toggle {
+            background: rgba(30, 40, 60, 0.2);
+            backdrop-filter: blur(8px);
+            color: #1e2f3f;
+            border-color: rgba(0,0,0,0.1);
+        }
+        .theme-toggle i {
+            font-size: 1.2rem;
+        }
+        .theme-toggle:hover {
+            transform: scale(1.02);
+            background: rgba(0,0,0,0.3);
+        }
+
+        /* profile header */
         .profile-header {
-            background: linear-gradient(135deg, #ffffff 0%, #fef9f0 100%);
             padding: 2.5rem 2rem 1.8rem 2rem;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
             text-align: center;
+            transition: border 0.2s;
         }
-
-        .avatar-wrapper {
-            display: inline-block;
-            position: relative;
+        body.dark-mode .profile-header {
+            border-bottom-color: rgba(255, 255, 255, 0.1);
         }
-
         .avatar {
             width: 130px;
             height: 130px;
@@ -55,25 +154,30 @@
             border: 4px solid white;
             box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.2);
             transition: transform 0.25s ease;
-            background: #eef2ff;
+            background: #cbd5e1;
         }
-
         .avatar:hover {
             transform: scale(1.02);
         }
-
         .profile-header h1 {
             font-size: 2.5rem;
             font-weight: 800;
             letter-spacing: -0.02em;
             margin-top: 1rem;
             margin-bottom: 0.5rem;
+        }
+        body.light-mode .profile-header h1 {
             background: linear-gradient(120deg, #0f2b3d, #1e4a6e);
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
         }
-
+        body.dark-mode .profile-header h1 {
+            background: linear-gradient(135deg, #c1e0ff, #9ac2db);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
         .contact-links {
             display: flex;
             flex-wrap: wrap;
@@ -81,7 +185,6 @@
             gap: 1.8rem;
             margin-top: 1rem;
         }
-
         .contact-item {
             display: inline-flex;
             align-items: center;
@@ -95,19 +198,20 @@
             text-decoration: none;
             color: #1e4663;
         }
-
+        body.dark-mode .contact-item {
+            background: #1f2a3e;
+            color: #cbdff2;
+        }
         .contact-item i {
-            font-size: 1.2rem;
             color: #2c7da0;
         }
-
-        .contact-item:hover {
-            background: #e6edf4;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-            color: #0f3b5c;
+        body.dark-mode .contact-item i {
+            color: #7ab3c8;
         }
-
+        .contact-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+        }
         hr {
             margin: 1rem auto 0 auto;
             width: 80px;
@@ -116,34 +220,35 @@
             border: 0;
             border-radius: 4px;
         }
-
-        /* content sections */
+        body.dark-mode hr {
+            background: #3a4c66;
+        }
         .content {
             padding: 2rem 2.2rem 2.5rem 2.2rem;
         }
-
         .section {
             margin-bottom: 2.8rem;
         }
-
         .section-title {
             display: flex;
             align-items: center;
             gap: 0.75rem;
             font-size: 1.8rem;
             font-weight: 700;
-            letter-spacing: -0.01em;
             border-left: 5px solid #2c7da0;
             padding-left: 1rem;
             margin-bottom: 1.6rem;
+        }
+        body.light-mode .section-title {
             color: #0f2b3d;
         }
-
+        body.dark-mode .section-title {
+            color: #e2edf7;
+        }
         .section-title i {
             font-size: 1.6rem;
             color: #2c7da0;
         }
-
         .job-card, .project-card {
             background: #f9fbfd;
             border-radius: 1.5rem;
@@ -151,90 +256,83 @@
             margin-bottom: 1.5rem;
             transition: all 0.2s;
             border: 1px solid #e9edf2;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
         }
-
+        body.dark-mode .job-card, body.dark-mode .project-card {
+            background: #0f172acc;
+            border-color: #2d3a4e;
+        }
         .job-card:hover, .project-card:hover {
-            border-color: #c9dfec;
-            background: #ffffff;
-            box-shadow: 0 12px 22px -12px rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 22px -12px rgba(0, 0, 0, 0.15);
         }
-
         .job-title {
             font-weight: 700;
             font-size: 1.35rem;
-            color: #114e6e;
             margin-bottom: 0.25rem;
         }
-
+        body.light-mode .job-title { color: #114e6e; }
+        body.dark-mode .job-title { color: #bbd4f0; }
         .company {
             font-weight: 600;
             color: #2c7da0;
-            display: inline-block;
-            margin-right: 1rem;
         }
-
+        body.dark-mode .company { color: #8bbdd9; }
         .date {
             font-size: 0.85rem;
-            color: #6c86a3;
             background: #eef3fc;
             padding: 0.2rem 0.7rem;
             border-radius: 30px;
             display: inline-block;
         }
-
+        body.dark-mode .date {
+            background: #1e2a3c;
+            color: #b9d0e4;
+        }
         .role {
             font-weight: 600;
             margin: 0.5rem 0 0.8rem 0;
-            color: #1f5e7e;
         }
-
         .desc-list {
             margin-top: 0.75rem;
             padding-left: 1.2rem;
         }
-
         .desc-list li {
             margin-bottom: 0.4rem;
-            color: #2c3f4f;
         }
-
         pre {
             font-family: 'Inter', monospace;
             background: #f1f5f9;
             padding: 0.8rem 1.2rem;
             border-radius: 1rem;
             font-size: 0.9rem;
-            color: #0f3b5a;
             margin-top: 0.6rem;
             white-space: pre-wrap;
-            word-break: break-word;
             border-left: 3px solid #7fb4ca;
         }
-
+        body.dark-mode pre {
+            background: #0a101ccc;
+            color: #ccdeee;
+            border-left-color: #547e9e;
+        }
         .project-link {
             display: inline-flex;
             align-items: center;
             gap: 8px;
             font-weight: 600;
             text-decoration: none;
-            color: #1f6390;
             background: #eef2fa;
             padding: 0.3rem 1rem;
             border-radius: 40px;
             transition: 0.2s;
         }
-
-        .project-link i {
-            font-size: 0.9rem;
+        body.dark-mode .project-link {
+            background: #273753;
+            color: #cfe5ff;
         }
-
         .project-link:hover {
             background: #2c7da0;
             color: white;
-            transform: translateX(4px);
         }
-
         .project-item {
             display: flex;
             align-items: baseline;
@@ -244,187 +342,191 @@
             padding: 0.6rem 0;
             border-bottom: 1px dashed #e2e8f0;
         }
-
-        .project-desc {
-            color: #2c4c6c;
-            font-weight: 400;
+        body.dark-mode .project-item {
+            border-bottom-color: #2a3a4e;
         }
-
-        .second-company {
-            margin-top: 0.5rem;
-        }
-
         .badge-text {
             background: #eef2ff;
             border-radius: 24px;
             padding: 0.2rem 0.8rem;
             font-size: 0.8rem;
-            font-weight: 500;
         }
-
+        body.dark-mode .badge-text {
+            background: #1e2f42;
+        }
         @media (max-width: 700px) {
-            .content {
-                padding: 1.5rem;
-            }
-            .profile-header h1 {
-                font-size: 1.9rem;
-            }
-            .contact-links {
-                gap: 1rem;
-                flex-direction: column;
-                align-items: center;
-            }
-            .section-title {
-                font-size: 1.5rem;
-            }
-            .job-card, .project-card {
-                padding: 1.2rem;
-            }
+            .content { padding: 1.5rem; }
+            .profile-header h1 { font-size: 1.9rem; }
+            .contact-links { flex-direction: column; align-items: center; }
+            .theme-toggle { top: 1rem; right: 1rem; padding: 0.5rem 1rem; }
+        }
+        footer {
+            text-align: center;
+            font-size: 0.8rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+        body.dark-mode footer {
+            border-top-color: #1f2c3c;
+            color: #8ba0b8;
         }
     </style>
 </head>
-<body>
-<div class="resume-container">
-    <!-- Header with avatar, name, links -->
-    <div class="profile-header">
-        <div class="avatar-wrapper">
-            <!-- user.png remains, modern fallback with initials if missing, but we keep original src -->
-            <img class="avatar" src="user.png" alt="Abdulbosid Raxmonjanov profile" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?background=2c7da0&color=fff&rounded=true&size=130&name=Abdulbosid+Raxmonjanov';">
-        </div>
-        <h1>Raxmonjanov Abdulbosid</h1>
-        <div class="contact-links">
-            <a class="contact-item" href="http://instagram.com/vibes.rek1" target="_blank" rel="noopener noreferrer">
-                <i class="fab fa-instagram"></i> Instagram · vibes.rek1
-            </a>
-            <a class="contact-item" href="mailto:herokujava01@gmail.com">
-                <i class="fas fa-envelope"></i> herokujava01@gmail.com
-            </a>
-        </div>
-        <hr>
+<body class="dark-mode">
+    <div class="animated-bg"></div>
+    <div class="theme-toggle" id="themeToggleBtn">
+        <i class="fas fa-moon" id="themeIcon"></i>
+        <span id="themeLabel">Dark Mode</span>
     </div>
-
-    <div class="content">
-        <!-- EXPERIENCE section -->
-        <div class="section">
-            <div class="section-title">
-                <i class="fas fa-briefcase"></i>
-                <span>Work Experience</span>
+    <div class="resume-container">
+        <div class="profile-header">
+            <div class="avatar-wrapper">
+                <img class="avatar" src="user.png" alt="Abdulbosid Raxmonjanov" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?background=2c7da0&color=fff&rounded=true&size=130&name=Abdulbosid+Raxmonjanov';">
             </div>
-
-            <!-- Experience 1: Cloud Linux Inc -->
-            <div class="job-card">
-                <div class="job-title">Cloud Linux Inc, California</div>
-                <div>
-                    <span class="company"><i class="fas fa-cloud"></i> Cloud Linux Inc</span>
-                    <span class="date"><i class="far fa-calendar-alt"></i> July 2019 – October 2020</span>
-                </div>
-                <div class="role">Software Engineer (Remote)</div>
-                <span>✨ Worked on high-impact projects including:</span>
-                <ul class="desc-list">
-                    <li><strong>Live Manager:</strong> Real-time system for managing live events, reduced latency by 25%.</li>
-                    <li><strong>Data Analytics Tool:</strong> Built scalable analytics pipelines processing millions of events.</li>
-                    <li><strong>API Development:</strong> Designed RESTful APIs used by internal and external services.</li>
-                </ul>
-                <pre>🔧 Tech stack: Node.js, Python, AWS, PostgreSQL, Docker</pre>
+            <h1>Raxmonjanov Abdulbosid</h1>
+            <div class="contact-links">
+                <a class="contact-item" href="http://instagram.com/vibes.rek1" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-instagram"></i> Instagram · vibes.rek1
+                </a>
+                <a class="contact-item" href="mailto:herokujava01@gmail.com">
+                    <i class="fas fa-envelope"></i> herokujava01@gmail.com
+                </a>
             </div>
-
-            <!-- Experience 2: Another Company (modern placeholder with dynamic details) -->
-            <div class="job-card">
-                <div class="job-title">NexaCore Systems, Austin (Remote / Hybrid)</div>
-                <div>
-                    <span class="company"><i class="fas fa-laptop-code"></i> NexaCore Systems</span>
-                    <span class="date"><i class="far fa-calendar-alt"></i> November 2020 – Present</span>
-                </div>
-                <div class="role">Senior Full-Stack Developer</div>
-                <span>📌 Key achievements & leadership:</span>
-                <ul class="desc-list">
-                    <li><strong>Project Horizon:</strong> Led migration of legacy monolith to microservices, improved deploy frequency by 40%.</li>
-                    <li><strong>Real-time Dashboard:</strong> Engineered WebSocket analytics dashboard serving 10k+ concurrent users.</li>
-                    <li><strong>Open-source contributions:</strong> Maintained internal UI library and improved test coverage to 92%.</li>
-                </ul>
-                <pre>⚡ Responsibilities: code reviews, mentoring juniors, CI/CD pipelines (GitHub Actions, Kubernetes).</pre>
-            </div>
+            <hr>
         </div>
-
-        <!-- PROJECTS section (enhanced from original) -->
-        <div class="section">
-            <div class="section-title">
-                <i class="fas fa-code-branch"></i>
-                <span>Featured Projects</span>
-            </div>
-            <div class="project-card">
-                <p style="margin-bottom: 1.2rem; font-weight: 500;">🚀 Here are some of the projects that define my craft — modern, scalable, and impactful:</p>
-                <div class="project-item">
-                    <a class="project-link" href="https://github.com/yourproject1" target="_blank"><i class="fab fa-github"></i> Project 1 · EventFlow</a>
-                    <span class="project-desc">Event-driven live notification system with Kafka & React — reduces notification delay by 60%.</span>
+        <div class="content">
+            <!-- Experience section -->
+            <div class="section">
+                <div class="section-title">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Work Experience</span>
                 </div>
-                <div class="project-item">
-                    <a class="project-link" href="https://github.com/yourproject1" target="_blank"><i class="fab fa-github"></i> Project 2 · InsightViz</a>
-                    <span class="project-desc">Interactive data analytics dashboard with real-time filtering and custom widgets (D3.js + FastAPI).</span>
+                <div class="job-card">
+                    <div class="job-title">Cloud Linux Inc, California</div>
+                    <div><span class="company"><i class="fas fa-cloud"></i> Cloud Linux Inc</span> <span class="date"><i class="far fa-calendar-alt"></i> July 2019 – October 2020</span></div>
+                    <div class="role">Software Engineer (Remote)</div>
+                    <span>✨ Worked on high-impact projects:</span>
+                    <ul class="desc-list">
+                        <li><strong>Live Manager:</strong> Real-time live events system, reduced latency by 25%.</li>
+                        <li><strong>Data Analytics Tool:</strong> Scalable analytics pipelines processing millions of events.</li>
+                        <li><strong>API Development:</strong> RESTful APIs for internal/external services.</li>
+                    </ul>
+                    <pre>🔧 Stack: Node.js, Python, AWS, PostgreSQL, Docker</pre>
                 </div>
-                <div class="project-item">
-                    <a class="project-link" href="https://github.com/yourproject1" target="_blank"><i class="fab fa-github"></i> Project 3 · Cloud Manager</a>
-                    <span class="project-desc">Infrastructure as Code tool for automated AWS resource orchestration (Terraform, Lambda).</span>
+                <div class="job-card">
+                    <div class="job-title">NexaCore Systems, Austin (Remote / Hybrid)</div>
+                    <div><span class="company"><i class="fas fa-laptop-code"></i> NexaCore Systems</span> <span class="date"><i class="far fa-calendar-alt"></i> November 2020 – Present</span></div>
+                    <div class="role">Senior Full-Stack Developer</div>
+                    <ul class="desc-list">
+                        <li><strong>Project Horizon:</strong> Migrated monolith to microservices → 40% faster deployment.</li>
+                        <li><strong>Real-time Dashboard:</strong> WebSocket analytics for 10k+ concurrent users.</li>
+                        <li><strong>Open-source:</strong> Maintained UI library + code coverage 92%.</li>
+                    </ul>
+                    <pre>⚡ CI/CD, Kubernetes, code reviews, mentoring</pre>
                 </div>
-                <div class="project-item">
-                    <a class="project-link" href="https://github.com/yourproject1" target="_blank"><i class="fab fa-github"></i> Project 4 · PetCare API</a>
-                    <span class="project-desc">RESTful microservice for veterinary clinics, JWT auth & Swagger documentation.</span>
+            </div>
+            <!-- Projects -->
+            <div class="section">
+                <div class="section-title">
+                    <i class="fas fa-code-branch"></i>
+                    <span>Featured Projects</span>
+                </div>
+                <div class="project-card">
+                    <p style="margin-bottom: 1rem; font-weight: 500;">🚀 Innovative side-projects & open-source:</p>
+                    <div class="project-item"><a class="project-link" href="https://github.com/yourproject1" target="_blank"><i class="fab fa-github"></i> EventFlow</a><span class="project-desc">Event-driven live notification system (Kafka + React).</span></div>
+                    <div class="project-item"><a class="project-link" href="https://github.com/yourproject1" target="_blank"><i class="fab fa-github"></i> InsightViz</a><span class="project-desc">Interactive analytics dashboard with D3.js + FastAPI.</span></div>
+                    <div class="project-item"><a class="project-link" href="https://github.com/yourproject1" target="_blank"><i class="fab fa-github"></i> Cloud Manager</a><span class="project-desc">Infra as Code with Terraform, AWS Lambda orchestration.</span></div>
+                    <div class="project-item"><a class="project-link" href="https://github.com/yourproject1" target="_blank"><i class="fab fa-github"></i> PetCare API</a><span class="project-desc">RESTful microservice, JWT auth, Swagger docs.</span></div>
                 </div>
             </div>
-        </div>
-
-        <!-- ADDITIONAL PROJECT OR ORIGINAL NOTE: keeping original structure but modern & meaningful -->
-        <!-- we also keep the original second company placeholder style but we already upgraded it above -->
-        <!-- to respect the original "Another Company, Location (Year - Year)" and the pre content, we can add a supplementary section -->
-        <div class="section">
-            <div class="section-title">
-                <i class="fas fa-chalkboard-user"></i>
-                <span>Early career & achievements</span>
-            </div>
-            <div class="job-card" style="background: #fefaf5;">
-                <div class="job-title">Another Company · DevCore Labs, San Francisco</div>
-                <div>
-                    <span class="company"><i class="fas fa-building"></i> DevCore Labs</span>
-                    <span class="date">2021 – 2022 (Contract)</span>
+            <!-- Another company original section with pre content preserved -->
+            <div class="section">
+                <div class="section-title">
+                    <i class="fas fa-chalkboard-user"></i>
+                    <span>Early career & milestones</span>
                 </div>
-                <div class="role">Junior Software Engineer → Associate Developer</div>
-                <b>Details about responsibilities and achievements:</b>
-                <ul class="desc-list" style="margin-top: 8px;">
-                    <li><strong>Project Nexus:</strong> Contributed to high-availability data pipeline, improved throughput by 30%.</li>
-                    <li><strong>Internal Tooling:</strong> Developed CLI tool for database migrations used by 5+ teams.</li>
-                    <li><strong>Code Quality:</strong> Led refactoring of legacy module, reducing technical debt by 22%.</li>
-                </ul>
-                <pre>💡 Project 1: Smart Notification Service — Description: microservice with ML-based priority routing.
-💡 Project 2: Analytics Pipeline — real-time event aggregator using Redis Streams.
-💡 Project 3: Open-source GraphQL gateway — unified API layer for three backend services.</pre>
-                <div style="margin-top: 8px;"><span class="badge-text"><i class="fas fa-trophy"></i> Award: Internal Hackathon Winner 2022</span></div>
+                <div class="job-card">
+                    <div class="job-title">Another Company · DevCore Labs, San Francisco</div>
+                    <div><span class="company"><i class="fas fa-building"></i> DevCore Labs</span> <span class="date">2021 – 2022</span></div>
+                    <div class="role">Junior Software Engineer → Associate Developer</div>
+                    <b>Details about responsibilities and achievements:</b>
+                    <ul class="desc-list">
+                        <li><strong>Project Nexus:</strong> Data pipeline throughput +30%.</li>
+                        <li><strong>Internal Tooling:</strong> CLI for db migrations used by 5+ teams.</li>
+                        <li><strong>Refactoring:</strong> Reduced technical debt by 22%.</li>
+                    </ul>
+                    <pre>💡 Project 1: Smart Notification Service — ML-based priority routing.
+💡 Project 2: Analytics Pipeline — Redis Streams aggregator.
+💡 Project 3: GraphQL Gateway — unified API layer for three backends.</pre>
+                    <div><span class="badge-text"><i class="fas fa-trophy"></i> Internal Hackathon Winner 2022</span></div>
+                </div>
             </div>
-        </div>
-
-        <!-- Skills / tech stack extra (optional but gives "zorroq" modern richness) -->
-        <div class="section">
-            <div class="section-title">
-                <i class="fas fa-cogs"></i>
-                <span>Technical Arsenal</span>
+            <!-- Tech skills -->
+            <div class="section">
+                <div class="section-title">
+                    <i class="fas fa-cogs"></i>
+                    <span>Technical Arsenal</span>
+                </div>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.5rem;">
+                    <span style="background:#eef2ff; padding:0.4rem 1rem; border-radius:40px; font-weight:500;">JavaScript/TS</span>
+                    <span style="background:#eef2ff; padding:0.4rem 1rem; border-radius:40px; font-weight:500;">Python</span>
+                    <span style="background:#eef2ff; padding:0.4rem 1rem; border-radius:40px; font-weight:500;">Java</span>
+                    <span style="background:#eef2ff; padding:0.4rem 1rem; border-radius:40px; font-weight:500;">React/Next.js</span>
+                    <span style="background:#eef2ff; padding:0.4rem 1rem; border-radius:40px; font-weight:500;">Node.js</span>
+                    <span style="background:#eef2ff; padding:0.4rem 1rem; border-radius:40px; font-weight:500;">AWS</span>
+                    <span style="background:#eef2ff; padding:0.4rem 1rem; border-radius:40px; font-weight:500;">Docker/K8s</span>
+                    <span style="background:#eef2ff; padding:0.4rem 1rem; border-radius:40px; font-weight:500;">PostgreSQL</span>
+                </div>
+                <style>
+                    body.dark-mode .section span[style*="background:#eef2ff"] {
+                        background: #1f2b3e !important;
+                        color: #cbdff5;
+                    }
+                </style>
             </div>
-            <div style="display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.5rem;">
-                <span style="background:#eef2ff; padding:0.4rem 1rem; border-radius:40px; font-weight:500;">JavaScript/TypeScript</span>
-                <span style="background:#eef2ff; padding:0.4rem 1rem; border-radius:40px; font-weight:500;">Python</span>
-                <span style="background:#eef2ff; padding:0.4rem 1rem; border-radius:40px; font-weight:500;">Java</span>
-                <span style="background:#eef2ff; padding:0.4rem 1rem; border-radius:40px; font-weight:500;">React / Next.js</span>
-                <span style="background:#eef2ff; padding:0.4rem 1rem; border-radius:40px; font-weight:500;">Node.js</span>
-                <span style="background:#eef2ff; padding:0.4rem 1rem; border-radius:40px; font-weight:500;">AWS (EC2, Lambda, RDS)</span>
-                <span style="background:#eef2ff; padding:0.4rem 1rem; border-radius:40px; font-weight:500;">Docker/K8s</span>
-                <span style="background:#eef2ff; padding:0.4rem 1rem; border-radius:40px; font-weight:500;">PostgreSQL / MongoDB</span>
-                <span style="background:#eef2ff; padding:0.4rem 1rem; border-radius:40px; font-weight:500;">Git/GitHub Actions</span>
-            </div>
-        </div>
-
-        <!-- footer with subtle note -->
-        <div style="margin-top: 2rem; text-align: center; font-size: 0.8rem; color: #6082a0; border-top: 1px solid #eef2f5; padding-top: 1.8rem;">
-            <i class="fas fa-globe"></i> Open for collaborations · Let's connect · Portfolio built with minimal design & maximum impact
+            <footer>
+                <i class="fas fa-globe"></i> Open for collaborations · Animated cosmic flow · Theme switcher included
+            </footer>
         </div>
     </div>
-</div>
+    <script>
+        (function() {
+            const toggleBtn = document.getElementById('themeToggleBtn');
+            const themeIcon = document.getElementById('themeIcon');
+            const themeLabel = document.getElementById('themeLabel');
+            const body = document.body;
+            
+            function setTheme(theme) {
+                if (theme === 'light') {
+                    body.classList.remove('dark-mode');
+                    body.classList.add('light-mode');
+                    themeIcon.className = 'fas fa-sun';
+                    themeLabel.innerText = 'Light Mode';
+                    localStorage.setItem('portfolio-theme', 'light');
+                } else {
+                    body.classList.remove('light-mode');
+                    body.classList.add('dark-mode');
+                    themeIcon.className = 'fas fa-moon';
+                    themeLabel.innerText = 'Dark Mode';
+                    localStorage.setItem('portfolio-theme', 'dark');
+                }
+            }
+            
+            const savedTheme = localStorage.getItem('portfolio-theme');
+            if (savedTheme === 'light') {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+            
+            toggleBtn.addEventListener('click', () => {
+                if (body.classList.contains('dark-mode')) {
+                    setTheme('light');
+                } else {
+                    setTheme('dark');
+                }
+            });
+        })();
+    </script>
 </body>
 </html>
